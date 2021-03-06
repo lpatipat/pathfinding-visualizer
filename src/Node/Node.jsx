@@ -13,14 +13,14 @@ function Node({
   onMouseUp,
 }) {
   const idRef = useRef();
-  const extraClassName = isFinish
-    ? "node-finish"
-    : isStart
-    ? "node-start"
-    : isVisited
+  const extraClassName = isVisited
     ? "node-visited"
     : isWall
     ? "node-wall"
+    : isFinish
+    ? "node-finish"
+    : isStart
+    ? "node-start"
     : "";
   return (
     <div

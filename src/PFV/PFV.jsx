@@ -81,7 +81,7 @@ function PFV() {
 
   const handleMouseUp = () => {
     setGridState((prevState) => {
-      return { ...prevState, mouseIsPressed: false };
+      return { ...prevState, mouseIsPressed: !prevState.mouseIsPressed };
     });
   };
 
@@ -107,6 +107,7 @@ function PFV() {
       <button onClick={visualizeDijkstra}>
         Visualize Dijkstra's Algorithm
       </button>
+      <h1>{`mouseIsPressed is ${gridState.mouseIsPressed}`}</h1>
       <div className="grid">
         {gridState.grid &&
           gridState.grid.map((row, rowIdx) => {
@@ -158,6 +159,10 @@ const createNode = (col, row) => {
 };
 
 const getNewGridWithWallToggled = (grid, row, col) => {
+  //breaks out of function if we entered the start node or finish node
+  if (grid[row][col].isStart || grid[row][col].isFinish) {
+    return grid;
+  }
   const newGrid = grid.slice();
   const node = newGrid[row][col];
   const newNode = {
