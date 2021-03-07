@@ -14,6 +14,31 @@ function PFV() {
     grid: [],
     mouseIsPressed: false,
   });
+  //refresh grid state
+  const getRefreshedGrid = () => {
+    const refreshedGrid = [];
+    for (let row = 0; row < 20; row++) {
+      const currentRow = [];
+      for (let col = 0; col < 50; col++) {
+        currentRow.push(createNode(col, row));
+      }
+
+      refreshedGrid.push(currentRow);
+    }
+    setGridState((prevState) => {
+      return { ...prevState, grid: refreshedGrid };
+    });
+    refreshAnimations();
+    return refreshedGrid;
+  };
+  const refreshAnimations = () => {
+    gridState.grid.forEach((row) => {
+      row.forEach((node) => {
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          "node";
+      });
+    });
+  };
   //defining getInitial Grid
   const getInitialGrid = () => {
     const initGrid = [];
@@ -104,6 +129,13 @@ function PFV() {
   }, []);
   return (
     <div className="section">
+      <button
+        onClick={() => {
+          getRefreshedGrid();
+        }}
+      >
+        clear
+      </button>
       <button onClick={visualizeDijkstra}>
         Visualize Dijkstra's Algorithm
       </button>

@@ -21,6 +21,8 @@ function Node({
     ? "node-finish"
     : isStart
     ? "node-start"
+    : isVisited
+    ? "node-visited"
     : "";
   return (
     <div
