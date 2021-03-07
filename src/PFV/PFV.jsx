@@ -34,6 +34,15 @@ function PFV() {
   const refreshAnimations = () => {
     gridState.grid.forEach((row) => {
       row.forEach((node) => {
+        if (node.isStart) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-start";
+          return;
+        } else if (node.isFinish) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            "node node-finish";
+          return;
+        }
         document.getElementById(`node-${node.row}-${node.col}`).className =
           "node";
       });
